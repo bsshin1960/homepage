@@ -13,7 +13,21 @@ document.addEventListener('DOMContentLoaded', () => {
   initGallery();
   initForm();
   initSmoothScroll();
+  registerServiceWorker();
 });
+
+// ============================================================
+// PWA - Service Worker Registration
+// ============================================================
+function registerServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then((reg) => console.log('[PWA] Service Worker registered successfully:', reg.scope))
+        .catch((err) => console.log('[PWA] Service Worker registration failed:', err));
+    });
+  }
+}
 
 // ============================================================
 // HEADER - Scroll Effect & Active Link
